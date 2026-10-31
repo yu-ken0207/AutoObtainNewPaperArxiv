@@ -22,3 +22,7 @@ https://ithelp.ithome.com.tw/m/articles/10263168
 
 ### arxiv
 https://info.arxiv.org/help/api/basics.html
+
+## License
+
+Apache-2.0，見 [LICENSE](LICENSE)。

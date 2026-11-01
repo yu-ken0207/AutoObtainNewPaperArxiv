@@ -1,32 +1,32 @@
 # ArXiv Paper Fetcher
 
-> Fetches the latest arXiv papers on a topic (default: RAG) through the official arXiv API and translates each abstract into Traditional Chinese, so new research is quick to skim.
+**English** | [繁體中文](README.zh-TW.md)
 
-自動從 arXiv 抓某個主題最新的論文（預設是 RAG），列出標題、連結、第一作者、日期，並把摘要翻成繁體中文，方便快速掃過新研究。
+Fetches the latest arXiv papers on a topic (default: RAG) through the official arXiv API, lists the title, link, first author, and dates, and translates each abstract (default: Traditional Chinese), so new research is quick to skim.
 
-## 做什麼
+## What it does
 
-1. 用 arXiv 官方 API（[`arxiv`](https://pypi.org/project/arxiv/) 套件）照投稿日期抓最新的論文
-2. 把摘要翻成繁體中文
-3. 印出每篇的標題、連結、第一作者、發表與更新日期、翻譯後的摘要
+1. Fetches the newest papers by submission date through the official arXiv API (the [`arxiv`](https://pypi.org/project/arxiv/) package)
+2. Translates each abstract
+3. Prints each paper's title, link, first author, published and updated dates, and the translated abstract
 
-目前程式印完第一篇就停（`main.py` 裡的 `break`），拿掉就會印全部。
+The program currently stops after the first paper (the `break` in `main.py`); remove it to print them all.
 
-## 安裝
+## Install
 
-需要 Python 3.8 以上。
+Python 3.8 or later.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 使用
+## Usage
 
 ```bash
 python main.py
 ```
 
-輸出長這樣（2026-10-31 實際執行，摘要那行省略）：
+Sample output (run on 2026-10-31, abstract omitted):
 
 ```text
 Title: Decompose, Estimate, Select: Coverage-Aware Context Construction for Long-Form RAG
@@ -34,38 +34,36 @@ URL: http://arxiv.org/abs/2610.40314v1
 First author: He Tu
 Published: 2026-10-29
 Updated: 2026-10-29
-Summary (translated): （摘要的繁體中文翻譯）
+Summary (translated): (the abstract in Traditional Chinese)
 ```
 
-## 設定
+## Settings
 
-都在 `config.py`：
+All in `config.py`:
 
-| 設定 | 預設值 | 說明 |
+| Setting | Default | Description |
 |---|---|---|
-| `query` | `"RAG"` | 搜尋條件，語法同 [arXiv API](https://info.arxiv.org/help/api/user-manual.html)，例如 `cat:cs.CL` 是整個計算語言學分類 |
-| `max_results` | `20` | 最多抓幾篇 |
-| `sort_by` | `"SubmittedDate"` | 排序方式，也可以用 `Relevance`、`LastUpdatedDate` |
-| `to_lang` | `"zh-Hant"` | 摘要翻成哪種語言 |
+| `query` | `"RAG"` | Search query, using the [arXiv API](https://info.arxiv.org/help/api/user-manual.html) syntax; for example `cat:cs.CL` is the whole Computation and Language category |
+| `max_results` | `20` | Maximum number of papers |
+| `sort_by` | `"SubmittedDate"` | Sort order; `Relevance` and `LastUpdatedDate` also work |
+| `to_lang` | `"zh-Hant"` | Language to translate abstracts into |
 
-## 注意
+## Note
 
-翻譯用的是 Microsoft Edge 瀏覽器內建翻譯的端點，不是正式的 Azure Translator API：不用金鑰，但隨時可能失效或被限制。要長期使用，建議改接 [Azure Translator](https://learn.microsoft.com/zh-tw/azure/ai-services/translator/)。
+Translation uses the endpoint behind Microsoft Edge's built-in translator, not the official Azure Translator API. It needs no key, but it may stop working or be rate-limited at any time. For long-term use, switch to [Azure Translator](https://learn.microsoft.com/azure/ai-services/translator/).
 
-## 檔案
+## Files
 
-- `main.py`：入口
-- `config.py`：設定
-- `fetch_papers/arxiv_fetcher.py`：呼叫 arXiv API
-- `data_processing/translate.py`：翻譯
+- `main.py`: entry point
+- `config.py`: settings
+- `fetch_papers/arxiv_fetcher.py`: calls the arXiv API
+- `data_processing/translate.py`: translation
 
-## 參考資料
+## References
 
-- arXiv API：https://info.arxiv.org/help/api/basics.html
-- Azure Translator：https://learn.microsoft.com/zh-tw/azure/ai-services/translator/
-- https://learn.microsoft.com/zh-tw/previous-versions/xamarin/xamarin-forms/data-cloud/azure-cognitive-services/text-translation
-- https://ithelp.ithome.com.tw/m/articles/10263168
+- arXiv API: https://info.arxiv.org/help/api/basics.html
+- Azure Translator: https://learn.microsoft.com/azure/ai-services/translator/
 
 ## License
 
-Apache-2.0，見 [LICENSE](LICENSE)。
+Apache-2.0, see [LICENSE](LICENSE).
